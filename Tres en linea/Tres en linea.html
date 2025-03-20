@@ -3,8 +3,58 @@
 <body>
   <div id="root"></div>
 </body>
-<!-- This setup is not suitable for production. -->
-<!-- Only use it in development! -->
+<!--DOCUMENTACION DEL CODIGO -->
+<!-- 
+Descripción
+Este programa implementa el juego de Tic-Tac-Toe utilizando React en una configuración de desarrollo basada en Babel y un 
+importmap para la gestión de módulos de ES6. La aplicación permite a dos jugadores alternar turnos, registrar el historial 
+de movimientos y navegar entre los movimientos realizados en la partida. Se utiliza React para manejar el estado de la 
+aplicación y gestionar la interfaz de usuario de manera declarativa.
+
+Estructura del Código
+
+1. HTML Base
+El documento HTML contiene un div con id `root`, que es donde se renderizará la aplicación React. 
+Además, se cargan los scripts necesarios para Babel y el uso de módulos ES6 a través de `importmap`.
+
+2. Importación de Módulos
+Se definen las dependencias de React y ReactDOM en un `importmap` para cargarlas desde una CDN.
+
+3. Componentes de React
+Componente `Square`
+Este componente representa una casilla del tablero. Recibe `value` (X, O o null) y `onSquareClick` 
+(función de clic para actualizar el estado del juego).
+
+Componente `Board`
+Representa el tablero de 3x3. Maneja el evento de clic en las casillas, actualizando el estado del 
+juego solo si la casilla está vacía y no hay ganador. Determina el ganador llamando a `calculateWinner` 
+y muestra el estado del juego.
+
+Componente `Game` (Principal)
+Gestiona el historial de movimientos y permite navegar entre ellos. Implementa la lógica para cambiar 
+entre turnos de jugadores. Permite navegar entre movimientos guardando el historial, crea una lista de 
+botones para viajar en la historia del juego.
+
+4. Lógica del Juego
+El código incluye la función `calculateWinner` que verifica combinaciones ganadoras.
+
+5. Renderizado en el DOM
+Finalmente, el componente `Game` se renderiza dentro del `root` en el documento HTML.
+
+6. Estilos CSS
+El juego tiene estilos simples para mostrar el tablero y los botones de manera ordenada.
+
+Funcionamiento del Juego
+1. Se muestra un tablero de 3x3 casillas vacías.
+2. El jugador "X" empieza el turno.
+3. Los jugadores se alternan haciendo clic en una casilla vacía.
+4. Cuando hay un ganador o el tablero está lleno, el juego muestra el resultado.
+5. Se puede retroceder en la historia del juego y ver movimientos anteriores.
+
+Conclusión
+Este programa es una implementación sencilla y didáctica de React, aplicando conceptos como el estado, 
+propiedades, componentes y la gestión del DOM. Es ideal para aprender React mediante un ejemplo práctico.
+ -->
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script async src="https://ga.jspm.io/npm:es-module-shims@1.7.0/dist/es-module-shims.js"></script>
 <script type="importmap">
