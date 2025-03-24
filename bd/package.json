@@ -1,0 +1,26 @@
+{
+  "name": "prog-web",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000H\u0000T\u0000M\u0000L\u0000-\u0000-\u0000-\u0000P\u0000r\u0000o\u0000g\u0000r\u0000a\u0000m\u0000a\u0000c\u0000i\u0000o\u0000n\u0000-\u0000W\u0000e\u0000b\u0000\r\u0000 \u0000#\u0000 \u0000H\u0000T\u0000M\u0000L\u0000-\u0000-\u0000-\u0000P\u0000r\u0000o\u0000g\u0000r\u0000a\u0000m\u0000a\u0000c\u0000i\u0000o\u0000n\u0000-\u0000W\u0000e\u0000b\u0000\r\u0000 \u0000",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CamilaEER/HTML---Programacion-Web.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CamilaEER/HTML---Programacion-Web/issues"
+  },
+  "homepage": "https://github.com/CamilaEER/HTML---Programacion-Web#readme",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "mysql": "^2.18.1"
+  }
+}

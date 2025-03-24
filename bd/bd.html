@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+</head>
+<body>
+    <h2>Registro de Persona</h2>
+    <form id="registroForm">
+        <label for="Nombre">Nombre:</label>
+        <input type="text" id="Nombre" name="Nombre" required><br><br>
+        
+        <label for="Edad">Edad:</label>
+        <input type="number" id="Edad" name="Edad" required><br><br>
+        
+        <button type="submit">Registrar</button>
+    </form>
+
+    <script>
+        document.getElementById('registroForm').addEventListener('submit', async function (event) {
+            event.preventDefault();
+            
+            // Obtener valores correctamente
+            const Nombre = document.getElementById('Nombre').value;
+            const Edad = document.getElementById('Edad').value;
+            
+            // Enviar datos a la API correctamente
+            const response = await fetch('http://localhost:3000/registrar', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ Nombre, Edad })  // Ahora los nombres coinciden con los inputs
+            });
+
+            const result = await response.text();
+            alert(result);
+        });
+    </script>
+</body>
+</html>
