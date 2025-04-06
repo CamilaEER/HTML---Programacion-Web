@@ -1,0 +1,76 @@
+<form id="registroForm">
+    <input type="text" id="Nombre" placeholder="Nombre" required> <br>
+    <input type="number" id="Edad" placeholder="Edad" required><br>
+    <input type="email" id="Correo" placeholder="Correo" required><br>
+    <input type="password" id="Contraseña" placeholder="Contraseña" required><br>
+    <button type="submit">Registrar</button>
+</form>
+
+<script>
+document.getElementById("registroForm").addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    const Nombre = document.getElementById("Nombre").value;
+    const Edad = document.getElementById("Edad").value;
+    const Correo = document.getElementById("Correo").value;
+    const Password = document.getElementById("Contraseña").value;
+
+    const response = await fetch("http://localhost:3000/usuarios", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ Nombre, Edad, Correo, Password })
+    });
+
+    const result = await response.text();
+    alert(result);
+});
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/validator/13.9.0/validator.min.js"></script>
+<script>
+document.getElementById("Contraseña").addEventListener("input", function() {
+    const contraseña = this.value;
+    const mensaje = document.getElementById("mensaje");
+
+    if (validator.isStrongPassword(contraseña, { 
+        minLength: 8, minLowercase: 1, 
+        minUppercase: 1, minNumbers: 1, minSymbols: 1 
+    })) { 
+        mensaje.innerText = "Contraseña segura";
+        mensaje.style.color = "green";
+    } else { 
+        mensaje.innerText = "Contraseña no segura";
+        mensaje.style.color = "red";
+    }
+});
+</script>
+<span id="mensaje">&nbsp;</span>
+
+<form id="loginForm">
+    <br><br>
+    <input type="email" id="CorreoLogin" placeholder="Correo" required><br>
+    <input type="password" id="ContraseñaLogin" placeholder="Contraseña" required><br>
+    <button type="submit">Iniciar sesión</button><br>
+</form>
+
+<script>
+document.getElementById("loginForm").addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    const Correo = document.getElementById("CorreoLogin").value;
+    const Contraseña = document.getElementById("ContraseñaLogin").value;
+
+    const response = await fetch("http://localhost:3000/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ Correo, Contraseña })
+    });
+
+    const result = await response.json();
+    alert(result.message);
+
+    if (result.success) {
+        window.location.href = "prueba.html"; // Redirigir si es exitoso
+    }
+});
+</script>
