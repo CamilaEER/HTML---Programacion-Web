@@ -1,18 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Agregar Persona</title>
+    <title>Lista de Personas</title>
 </head>
 <body>
-    <h1>Formulario para agregar persona</h1>
-    <form action="/insert" method="POST">
-        <label for="nombre">Nombre:</label>
-        <input type="text" name="nombre" required><br><br>
-
-        <label for="edad">Edad:</label>
-        <input type="number" name="edad" required><br><br>
-
-        <input type="submit" value="Guardar Persona">
-    </form>
+    <h1>Personas</h1>
+    <a href="{{ url_for('add_persona') }}">Agregar Nueva Persona</a>
+    <table border="1" cellpadding="8" cellspacing="0">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Edad</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for persona in personas %}
+            <tr>
+                <td>{{ persona[0] }}</td> <!-- idpersonas -->
+                <td>{{ persona[1] }}</td> <!-- nombre -->
+                <td>{{ persona[2] }}</td> <!-- edad -->
+                <td>
+                    <a href="{{ url_for('edit_persona', idpersonas=persona[0]) }}">Editar</a> |
+                    <a href="{{ url_for('delete_persona', idpersonas=persona[0]) }}" onclick="return confirm('¿Seguro que quieres eliminar?');">Eliminar</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="4">No hay personas registradas.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>

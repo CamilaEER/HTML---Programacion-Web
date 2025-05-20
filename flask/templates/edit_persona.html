@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editar Persona</title>
+</head>
+<body>
+    <h1>Editar Persona</h1>
+    <form action="{{ url_for('edit_persona', idpersonas=persona[0]) }}" method="POST">
+        <label for="nombre">Nombre:</label>
+        <input type="text" name="nombre" value="{{ persona[1] }}" required><br><br>
+
+        <label for="edad">Edad:</label>
+        <input type="number" name="edad" value="{{ persona[2] }}" required><br><br>
+
+        <input type="submit" value="Actualizar">
+    </form>
+    <br>
+    <a href="{{ url_for('index') }}">Volver a lista</a>
+</body>
+</html>
