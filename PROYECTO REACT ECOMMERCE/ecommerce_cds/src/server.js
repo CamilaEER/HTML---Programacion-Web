@@ -94,3 +94,16 @@ app.post('/registro', (req, res) => {
     });
   });
 });
+
+// server.js (Backend)
+app.get('/api/cds', (req, res) => {
+  const query = 'SELECT * FROM CDs';
+  db.query(query, (err, result) => {
+    if (err) {
+      console.error('Error al obtener los CDs:', err);
+      return res.status(500).json({ message: 'Error al obtener los CDs' });
+    }
+    res.json(result); // Devolver los CDs en formato JSON
+  });
+});
+

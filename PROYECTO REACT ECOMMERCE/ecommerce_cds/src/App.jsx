@@ -11,16 +11,19 @@ import Carrito from './pages/Carrito';
 import Checkout from './pages/Checkout';
 
 function App() {
+  const token = localStorage.getItem('token');
+
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<LandingPage />} />               {/* Página de inicio */}
-        <Route path="/login" element={<Login />} />         {/* Login */}
-        <Route path="/registro" element={<Registro />} />   {/* Registro */}
-        <Route path="/home" element={<Home />} />           {/* Home */}
-        <Route path="/cd/:id" element={<DetalleCD />} />    {/* Detalle del disco */}
-        <Route path="/carrito" element={<Carrito />} />     {/* Carrito */}
-        <Route path="/checkout" element={<Checkout />} />   {/* Pago */}
+        {/* Si hay un token, redirige a Home */}
+        <Route path="/" element={token ? <Home /> : <LandingPage />} />  
+        <Route path="/login" element={<Login />} />
+        <Route path="/registro" element={<Registro />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/cd/:id" element={<DetalleCD />} />
+        <Route path="/carrito" element={<Carrito />} />
+        <Route path="/checkout" element={<Checkout />} />
       </Routes>
     </Router>
   );

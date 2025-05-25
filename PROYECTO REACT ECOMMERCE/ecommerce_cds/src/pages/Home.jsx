@@ -1,20 +1,45 @@
 // src/pages/Home.jsx
-import React from 'react';
-import { Navigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import CardCD from '../components/CardCD';  // Componente para mostrar cada CD
 
 function Home() {
-  // Verificar si hay un token JWT en el localStorage
-  const token = localStorage.getItem('token');
+  const [cds, setCds] = useState([]);  // Estado para guardar los CDs
+  const [loading, setLoading] = useState(true);  // Estado de carga
+  const [error, setError] = useState(null);  // Estado para manejar errores
 
-  if (!token) {
-    // Si no hay token, redirigir a la página de login
-    return <Navigate to="/login" />;
+  // Usar useEffect para hacer la llamada a la API cuando el componente se monte
+  useEffect(() => {
+    const fetchCds = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/cds');
+        const data = await response.json();
+        setCds(data);  // Guardar los CDs en el estado
+      } catch (err) {
+        setError('Hubo un problema al cargar los CDs');
+      } finally {
+        setLoading(false);  // Dejar de cargar cuando se obtengan los datos
+      }
+    };
+
+    fetchCds();  // Llamar la función para obtener los CDs
+  }, []);
+
+  if (loading) {
+    return <div>Cargando...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
   }
 
   return (
     <div>
-      <h1>Bienvenido al Catálogo de Discos</h1>
-      {/* Aquí mostrarías el catálogo de CDs */}
+      <h1>Catálogo de Discos</h1>
+      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+        {cds.map((cd) => (
+          <CardCD key={cd.idCD} cd={cd} />
+        ))}
+      </div>
     </div>
   );
 }
