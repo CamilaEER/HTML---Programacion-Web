@@ -7,7 +7,8 @@ function Home() {
   const token = localStorage.getItem('token');
 
   if (!token) {
-    return <Navigate to="/login" />; // Redirigir a Login si no hay token
+    // Si no hay token, redirigir a la página de login
+    return <Navigate to="/login" />;
   }
 
   return (

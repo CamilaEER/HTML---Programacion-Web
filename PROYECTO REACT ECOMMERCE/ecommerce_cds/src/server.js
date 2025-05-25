@@ -7,6 +7,9 @@ const bodyParser = require('body-parser');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+const cors = require('cors');
+app.use(cors());  // Permite todas las solicitudes CORS
+
 app.use(bodyParser.json());
 
 // Configuración de la base de datos
@@ -57,27 +60,34 @@ app.listen(PORT, () => {
   console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
 
-// En server.js, agrega la ruta para el registro de usuarios
 app.post('/registro', (req, res) => {
+  console.log('Datos recibidos:', req.body);  // Log para depurar
+
   const { nombre, edad, correo, password } = req.body;
 
-  // Verificar si el correo ya existe en la base de datos
   const checkEmailQuery = 'SELECT * FROM Persona WHERE Correo = ?';
   db.query(checkEmailQuery, [correo], (err, result) => {
-    if (err) return res.status(500).json({ message: 'Error de servidor' });
+    if (err) {
+      console.error('Error al verificar el correo:', err);  // Log de errores
+      return res.status(500).json({ message: 'Error de servidor' });
+    }
 
     if (result.length > 0) {
       return res.status(400).json({ message: 'El correo ya está registrado' });
     }
 
-    // Encriptar la contraseña con bcrypt
     bcrypt.hash(password, 10, (err, hashedPassword) => {
-      if (err) return res.status(500).json({ message: 'Error al encriptar la contraseña' });
+      if (err) {
+        console.error('Error al encriptar la contraseña:', err);  // Log de errores
+        return res.status(500).json({ message: 'Error al encriptar la contraseña' });
+      }
 
-      // Insertar el nuevo usuario en la base de datos
       const insertQuery = 'INSERT INTO Persona (Nombre, Edad, Correo, Password) VALUES (?, ?, ?, ?)';
       db.query(insertQuery, [nombre, edad, correo, hashedPassword], (err, result) => {
-        if (err) return res.status(500).json({ message: 'Error de servidor' });
+        if (err) {
+          console.error('Error al registrar el usuario:', err);  // Log de errores
+          return res.status(500).json({ message: 'Error de servidor' });
+        }
 
         return res.status(201).json({ message: 'Usuario registrado con éxito' });
       });
