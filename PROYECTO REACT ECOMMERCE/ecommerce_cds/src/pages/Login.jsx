@@ -21,10 +21,13 @@ function Login() {
 
       const data = await response.json();
       if (response.status !== 200) {
-        setError(data.message);
+        setError(data.message);  // Muestra el error si las credenciales son incorrectas
       } else {
+        // Guardar el token en localStorage si el login es exitoso
         localStorage.setItem('token', data.token);
-        navigate('/');
+
+        // Redirigir a Home después de login exitoso
+        navigate('/home');
       }
     } catch (err) {
       console.error('Error al iniciar sesión:', err);

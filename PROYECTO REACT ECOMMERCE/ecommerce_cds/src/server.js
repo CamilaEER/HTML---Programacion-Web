@@ -25,7 +25,7 @@ db.connect((err) => {
   console.log('Conexión a la base de datos exitosa');
 });
 
-// Ruta para hacer login
+// Ruta para login
 app.post('/login', (req, res) => {
   const { correo, password } = req.body;
 
@@ -39,7 +39,7 @@ app.post('/login', (req, res) => {
 
     const user = result[0];
 
-    // Compara las contraseñas usando bcrypt
+    // Comparar la contraseña ingresada con la almacenada en la base de datos
     bcrypt.compare(password, user.Password, (err, isMatch) => {
       if (err) return res.status(500).json({ message: 'Error de servidor' });
 
@@ -47,7 +47,7 @@ app.post('/login', (req, res) => {
         return res.status(400).json({ message: 'Contraseña incorrecta' });
       }
 
-      // Generar un token JWT
+      // Si la contraseña es correcta, generar un token JWT
       const token = jwt.sign({ idPersona: user.idPersona }, 'secreta', { expiresIn: '1h' });
 
       return res.json({ token });
@@ -55,39 +55,33 @@ app.post('/login', (req, res) => {
   });
 });
 
+
 // Iniciar servidor
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
 
+// Ruta para registro
 app.post('/registro', (req, res) => {
-  console.log('Datos recibidos:', req.body);  // Log para depurar
-
   const { nombre, edad, correo, password } = req.body;
 
+  // Verificar si el correo ya está registrado
   const checkEmailQuery = 'SELECT * FROM Persona WHERE Correo = ?';
   db.query(checkEmailQuery, [correo], (err, result) => {
-    if (err) {
-      console.error('Error al verificar el correo:', err);  // Log de errores
-      return res.status(500).json({ message: 'Error de servidor' });
-    }
+    if (err) return res.status(500).json({ message: 'Error de servidor' });
 
     if (result.length > 0) {
       return res.status(400).json({ message: 'El correo ya está registrado' });
     }
 
+    // Encriptar la contraseña antes de guardarla en la base de datos
     bcrypt.hash(password, 10, (err, hashedPassword) => {
-      if (err) {
-        console.error('Error al encriptar la contraseña:', err);  // Log de errores
-        return res.status(500).json({ message: 'Error al encriptar la contraseña' });
-      }
+      if (err) return res.status(500).json({ message: 'Error al encriptar la contraseña' });
 
+      // Insertar el nuevo usuario en la base de datos con la contraseña encriptada
       const insertQuery = 'INSERT INTO Persona (Nombre, Edad, Correo, Password) VALUES (?, ?, ?, ?)';
       db.query(insertQuery, [nombre, edad, correo, hashedPassword], (err, result) => {
-        if (err) {
-          console.error('Error al registrar el usuario:', err);  // Log de errores
-          return res.status(500).json({ message: 'Error de servidor' });
-        }
+        if (err) return res.status(500).json({ message: 'Error de servidor' });
 
         return res.status(201).json({ message: 'Usuario registrado con éxito' });
       });
@@ -95,15 +89,20 @@ app.post('/registro', (req, res) => {
   });
 });
 
+
 // server.js (Backend)
 app.get('/api/cds', (req, res) => {
-  const query = 'SELECT * FROM CDs';
+  const query = `
+    SELECT CDs.*, Artistas.Nombre AS ArtistaNombre
+    FROM CDs
+    JOIN Artistas ON CDs.idArtista = Artistas.idArtista
+  `;
+
   db.query(query, (err, result) => {
     if (err) {
       console.error('Error al obtener los CDs:', err);
       return res.status(500).json({ message: 'Error al obtener los CDs' });
     }
-    res.json(result); // Devolver los CDs en formato JSON
+    res.json(result); // Devolver los CDs con el nombre del artista
   });
 });
-

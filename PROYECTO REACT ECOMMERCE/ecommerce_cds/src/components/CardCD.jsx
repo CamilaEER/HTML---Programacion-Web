@@ -11,7 +11,7 @@ function CardCD({ cd }) {
         style={{ width: '100%', height: 'auto' }} 
       />
       <h3>{cd.Titulo}</h3>
-      <p><strong>Artista:</strong> {cd.Artista}</p>
+      <p><strong>Artista:</strong> {cd.ArtistaNombre}</p>
       <p><strong>Precio:</strong> ${cd.Precio}</p>
       <Link to={`/cd/${cd.idCD}`}>Ver detalles</Link>
     </div>
