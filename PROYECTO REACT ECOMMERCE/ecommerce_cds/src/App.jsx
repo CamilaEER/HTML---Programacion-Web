@@ -1,27 +1,25 @@
 // src/App.jsx
+import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import LandingPage from './pages/LandingPage';  // Página de inicio
+import LandingPage from './pages/LandingPage';
 import Login from './pages/Login';
 import Registro from './pages/Registro';
 import Home from './pages/Home';
-import DetalleCD from './pages/DetalleCD';
+import DetalleCD from './pages/DetalleCD';  // Importación correcta
 import Carrito from './pages/Carrito';
 import Checkout from './pages/Checkout';
 
 function App() {
-  const token = localStorage.getItem('token');
-
   return (
     <Router>
       <Routes>
-        {/* Si hay un token, redirige a Home */}
-        <Route path="/" element={token ? <Home /> : <LandingPage />} />  
+        <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registro" element={<Registro />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/cd/:id" element={<DetalleCD />} />
+        <Route path="/cd/:id" element={<DetalleCD />} />  {/* Asegúrate de que este sea el componente correcto */}
         <Route path="/carrito" element={<Carrito />} />
         <Route path="/checkout" element={<Checkout />} />
       </Routes>

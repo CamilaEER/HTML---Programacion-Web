@@ -1,0 +1,23 @@
+.landing-container {
+  background: linear-gradient(135deg, #ffafcc, #caffbf, #a0c4ff);
+  background-size: 600% 600%;
+  animation: gradientMove 15s ease infinite;
+}
+
+.landing-box {
+  background-color: white;
+  max-width: 500px;
+}
+
+.text-gradient {
+  background: linear-gradient(to right, #ff6ec4, #4facfe);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}

@@ -1,0 +1,31 @@
+.auth-container {
+  background: linear-gradient(135deg, #ffafcc, #caffbf, #a0c4ff);
+  background-size: 600% 600%;
+  animation: gradientMove 15s ease infinite;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-card {
+  background-color: white;
+  border-radius: 15px;
+  padding: 30px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.auth-title {
+  background: linear-gradient(to right, #ff6ec4, #4facfe);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
