@@ -1,13 +1,13 @@
 // src/pages/Home.jsx
 import React, { useState, useEffect } from 'react';
-import CardCD from '../components/CardCD';  // Componente para mostrar cada CD
+import CardCD from '../components/CardCD';
 
 function Home() {
-  const [cds, setCds] = useState([]);  // Estado para guardar los CDs
+  const [cds, setCds] = useState([]);  // Estado para almacenar los CDs
   const [loading, setLoading] = useState(true);  // Estado de carga
   const [error, setError] = useState(null);  // Estado para manejar errores
 
-  // Usar useEffect para hacer la llamada a la API cuando el componente se monte
+  // Usamos useEffect para hacer la llamada a la API cuando el componente se monte
   useEffect(() => {
     const fetchCds = async () => {
       try {
@@ -22,7 +22,7 @@ function Home() {
     };
 
     fetchCds();  // Llamar la función para obtener los CDs
-  }, []);
+  }, []);  // El array vacío asegura que solo se ejecute una vez, cuando el componente se monte
 
   if (loading) {
     return <div>Cargando...</div>;

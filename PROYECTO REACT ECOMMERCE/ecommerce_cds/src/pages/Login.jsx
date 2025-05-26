@@ -6,7 +6,7 @@ function Login() {
   const [correo, setCorreo] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const navigate = useNavigate();  // Hook de React Router para redirigir
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -23,13 +23,13 @@ function Login() {
       const data = await response.json();
 
       if (response.status !== 200) {
-        setError(data.message);
+        setError(data.message);  // Muestra el error si las credenciales son incorrectas
       } else {
-        // Guardar el token JWT en localStorage
+        // Guardar el token en localStorage si el login es exitoso
         localStorage.setItem('token', data.token);
 
-        // Redirigir a la página de Home después de iniciar sesión correctamente
-        navigate('/');  // '/' lleva a la página principal (Home)
+        // Redirigir a Home después de login exitoso
+        navigate('/home');
       }
     } catch (err) {
       console.error('Error al intentar iniciar sesión:', err);
