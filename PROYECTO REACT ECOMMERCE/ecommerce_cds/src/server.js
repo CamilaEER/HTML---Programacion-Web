@@ -106,3 +106,28 @@ app.get('/api/cds', (req, res) => {
     res.json(result); // Devolver los CDs con el nombre del artista
   });
 });
+
+// Ruta para obtener un CD específico por su ID
+app.get('/api/cds/:id', (req, res) => {
+  const { id } = req.params;
+
+  const query = `
+    SELECT CDs.*, Artistas.Nombre AS ArtistaNombre
+    FROM CDs
+    JOIN Artistas ON CDs.idArtista = Artistas.idArtista
+    WHERE CDs.idCD = ?
+  `;
+
+  db.query(query, [id], (err, result) => {
+    if (err) {
+      console.error('Error al obtener el CD:', err);
+      return res.status(500).json({ message: 'Error al obtener el CD' });
+    }
+
+    if (result.length === 0) {
+      return res.status(404).json({ message: 'CD no encontrado' });
+    }
+
+    res.json(result[0]); // Devuelve un solo CD
+  });
+});

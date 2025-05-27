@@ -1,0 +1,54 @@
+.detalle-container {
+  background-color: #a0c4ff;
+  min-height: 100vh;
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.detalle-card {
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  padding: 24px;
+  display: flex;
+  gap: 24px;
+  max-width: 800px;
+  width: 100%;
+}
+
+.detalle-img {
+  max-width: 300px;
+  border-radius: 12px;
+}
+
+.detalle-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.detalle-info h1 {
+  color: #ff6ec4;
+}
+
+.detalle-info h3 {
+  color: #1982c4;
+}
+
+.carrito-btn {
+  background-color: #ff6ec4;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.carrito-btn:hover {
+  background-color: #e15bb3;
+}
