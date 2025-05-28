@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import CardCD from '../components/CardCD';
+import Navbar from '../components/Navbar';
 import './Home.css';
 
 function Home() {
@@ -27,12 +28,15 @@ function Home() {
   if (error) return <div className="home-container text-center text-white"><h3>{error}</h3></div>;
 
   return (
-    <div className="home-container">
-      <h1 className="home-title">Catálogo de Discos</h1>
-      <div className="card-grid">
-        {cds.map((cd) => (
-          <CardCD key={cd.idCD} cd={cd} />
-        ))}
+    <div>
+      <Navbar /> 
+      <div className="home-container">
+        <h1 className="home-title">Catálogo de Discos</h1>
+        <div className="card-grid">
+          {cds.map((cd) => (
+            <CardCD key={cd.idCD} cd={cd} />
+          ))}
+        </div>
       </div>
     </div>
   );

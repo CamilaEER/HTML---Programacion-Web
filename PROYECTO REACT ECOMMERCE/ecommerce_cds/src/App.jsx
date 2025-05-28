@@ -3,6 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
+
+
 import LandingPage from './pages/LandingPage';
 import Login from './pages/Login';
 import Registro from './pages/Registro';
@@ -10,6 +12,8 @@ import Home from './pages/Home';
 import DetalleCD from './pages/DetalleCD';  // Importación correcta
 import Carrito from './pages/Carrito';
 import Checkout from './pages/Checkout';
+
+<Route path="/carrito" element={<Carrito />} />
 
 function App() {
   return (

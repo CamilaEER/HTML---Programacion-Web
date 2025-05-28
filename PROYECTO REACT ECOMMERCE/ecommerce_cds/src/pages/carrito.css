@@ -1,0 +1,43 @@
+.carrito-container {
+  background-color: #a0c4ff;
+  padding: 2rem;
+}
+
+.carrito-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.carrito-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border: 1px solid #ddd;
+  padding: 1rem;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+.carrito-item img {
+  width: 100px;
+  border-radius: 8px;
+}
+
+.info h3 {
+  margin: 0;
+}
+
+.info p {
+  margin: 0.2rem 0;
+}
+
+.info button {
+  background-color: #ff4444;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+}

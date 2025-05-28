@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './DetalleCD.css';
+import Navbar from '../components/Navbar';
+
 
 function DetalleCD() {
   const { id } = useParams();
@@ -26,20 +28,22 @@ function DetalleCD() {
   if (!cd) return <div className="detalle-container"><h3>Cargando detalles...</h3></div>;
 
   return (
-    <div className="detalle-container">
-      <div className="detalle-card">
-        <img src={cd.ImagenURL} alt={cd.Titulo} className="detalle-img" />
-        <div className="detalle-info">
-          <h1>{cd.Titulo}</h1>
-          <h3>{cd.ArtistaNombre}</h3>
-          <p>{cd.Descripcion}</p>
-          <p><strong>Precio:</strong> ${cd.Precio}</p>
-        </div>
-        <div>
-          <button className="carrito-btn" onClick={() => agregarAlCarrito(cd)}>
-            Agregar al carrito 🛒
-          </button>
-
+    <div>
+      <Navbar />
+      <div className="detalle-container">
+        <div className="detalle-card">
+          <img src={cd.ImagenURL} alt={cd.Titulo} className="detalle-img" />
+          <div className="detalle-info">
+            <h1>{cd.Titulo}</h1>
+            <h3>{cd.ArtistaNombre}</h3>
+            <p>{cd.Descripcion}</p>
+            <p><strong>Precio:</strong> ${cd.Precio}</p>
+          </div>
+          <div>
+            <button className="carrito-btn" onClick={() => agregarAlCarrito(cd)}>
+              Agregar al carrito 🛒
+            </button>
+          </div>
         </div>
       </div>
     </div>
