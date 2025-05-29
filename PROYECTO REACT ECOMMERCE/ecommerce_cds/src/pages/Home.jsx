@@ -1,44 +1,42 @@
-// src/pages/Home.jsx
 import React, { useState, useEffect } from 'react';
 import CardCD from '../components/CardCD';
+import Navbar from '../components/Navbar';
+import './Home.css';
 
 function Home() {
-  const [cds, setCds] = useState([]);  // Estado para almacenar los CDs
-  const [loading, setLoading] = useState(true);  // Estado de carga
-  const [error, setError] = useState(null);  // Estado para manejar errores
+  const [cds, setCds] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Usamos useEffect para hacer la llamada a la API cuando el componente se monte
   useEffect(() => {
     const fetchCds = async () => {
       try {
         const response = await fetch('http://localhost:5000/api/cds');
         const data = await response.json();
-        setCds(data);  // Guardar los CDs en el estado
+        setCds(data);
       } catch (err) {
         setError('Hubo un problema al cargar los CDs');
       } finally {
-        setLoading(false);  // Dejar de cargar cuando se obtengan los datos
+        setLoading(false);
       }
     };
 
-    fetchCds();  // Llamar la función para obtener los CDs
-  }, []);  // El array vacío asegura que solo se ejecute una vez, cuando el componente se monte
+    fetchCds();
+  }, []);
 
-  if (loading) {
-    return <div>Cargando...</div>;
-  }
-
-  if (error) {
-    return <div>{error}</div>;
-  }
+  if (loading) return <div className="home-container text-center text-white"><h3>Cargando...</h3></div>;
+  if (error) return <div className="home-container text-center text-white"><h3>{error}</h3></div>;
 
   return (
     <div>
-      <h1>Catálogo de Discos</h1>
-      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-        {cds.map((cd) => (
-          <CardCD key={cd.idCD} cd={cd} />
-        ))}
+      <Navbar /> 
+      <div className="home-container">
+        <h1 className="home-title">Catálogo de Discos</h1>
+        <div className="card-grid">
+          {cds.map((cd) => (
+            <CardCD key={cd.idCD} cd={cd} />
+          ))}
+        </div>
       </div>
     </div>
   );

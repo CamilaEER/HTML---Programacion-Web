@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 
 function CardCD({ cd }) {
   return (
-    <div style={{ border: '1px solid #ccc', padding: 10, margin: 10, width: 200 }}>
+    <div className="card-custom">
       <img 
         src={cd.ImagenURL || 'https://via.placeholder.com/150'} 
         alt={cd.Titulo} 
-        style={{ width: '100%', height: 'auto' }} 
+        style={{ width: '100%', borderRadius: '8px' }} 
       />
       <h3>{cd.Titulo}</h3>
       <p><strong>Artista:</strong> {cd.ArtistaNombre}</p>
