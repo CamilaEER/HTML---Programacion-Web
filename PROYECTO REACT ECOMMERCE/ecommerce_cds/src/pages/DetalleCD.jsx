@@ -41,7 +41,7 @@ function DetalleCD() {
           </div>
           <div>
             <button className="carrito-btn" onClick={() => agregarAlCarrito(cd)}>
-              Agregar al carrito 🛒
+              Agregar al carrito 
             </button>
           </div>
         </div>

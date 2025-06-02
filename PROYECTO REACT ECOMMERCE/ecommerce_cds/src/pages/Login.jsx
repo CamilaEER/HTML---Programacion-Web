@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
 import './AuthPages.css';
 
 function Login() {
@@ -21,12 +22,11 @@ function Login() {
 
       const data = await response.json();
       if (response.status !== 200) {
-        setError(data.message);  // Muestra el error si las credenciales son incorrectas
+        setError(data.message);
       } else {
-        // Guardar el token en localStorage si el login es exitoso
         localStorage.setItem('token', data.token);
-
-        // Redirigir a Home después de login exitoso
+        const decoded = jwtDecode(data.token);
+        localStorage.setItem('idPersona', decoded.idPersona);
         navigate('/home');
       }
     } catch (err) {
@@ -38,23 +38,17 @@ function Login() {
   return (
     <div className="auth-container">
       <div className="auth-card">
-        <h2 className="text-center auth-title mb-4">Iniciar sesión</h2>
-        <form onSubmit={handleLogin}>
-          <div className="mb-3">
-            <label className="form-label">Correo</label>
-            <input type="email" className="form-control" value={correo} onChange={(e) => setCorreo(e.target.value)} required />
-          </div>
+        <h2 className="auth-title">Iniciar sesión</h2>
+        <form onSubmit={handleLogin} className="auth-form">
+          <label>Correo</label>
+          <input type="email" value={correo} onChange={(e) => setCorreo(e.target.value)} required />
 
-          <div className="mb-3">
-            <label className="form-label">Contraseña</label>
-            <input type="password" className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} required />
-          </div>
+          <label>Contraseña</label>
+          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
 
-          {error && <div className="alert alert-danger">{error}</div>}
+          {error && <div className="auth-error">{error}</div>}
 
-          <div className="d-grid">
-            <button type="submit" className="btn btn-info">Entrar</button>
-          </div>
+          <button type="submit" className="auth-btn primary">Entrar</button>
         </form>
       </div>
     </div>

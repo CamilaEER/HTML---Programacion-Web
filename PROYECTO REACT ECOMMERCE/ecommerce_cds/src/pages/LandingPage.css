@@ -1,23 +1,72 @@
+/* src/pages/LandingPage.css */
+
 .landing-container {
-  background: linear-gradient(135deg, #ffafcc, #caffbf, #a0c4ff);
-  background-size: 600% 600%;
-  animation: gradientMove 15s ease infinite;
+  background: linear-gradient(135deg, #dbe7e4, #f6f4f1);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Helvetica Neue', sans-serif;
 }
 
 .landing-box {
-  background-color: white;
-  max-width: 500px;
+  background-color: #ffffff;
+  padding: 50px 40px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  text-align: center;
+  max-width: 420px;
+  width: 100%;
 }
 
-.text-gradient {
-  background: linear-gradient(to right, #ff6ec4, #4facfe);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-weight: bold;
+.landing-icon {
+  font-size: 48px;
+  margin-bottom: 20px;
 }
 
-@keyframes gradientMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+.landing-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.landing-sub {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.landing-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.landing-btn {
+  text-decoration: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+  text-align: center;
+}
+
+.landing-btn.primary {
+  background-color: #222;
+  color: white;
+}
+
+.landing-btn.primary:hover {
+  background-color: #444;
+}
+
+.landing-btn.secondary {
+  background-color: #6a00f4;
+  color: white;
+}
+
+.landing-btn.secondary:hover {
+  background-color: #4b0082;
 }

@@ -1,43 +1,108 @@
 .carrito-container {
-  background-color: #a0c4ff;
-  padding: 2rem;
+  background: linear-gradient(to right, #f2f2f2, #e8e8e8);
+  min-height: 100vh;
+  padding: 60px 20px;
+  font-family: 'Helvetica Neue', sans-serif;
+}
+
+.carrito-container h2 {
+  text-align: center;
+  font-size: 2.0rem;
+  font-weight: 600;
+  color: #2b2b2b;
+  margin-bottom: 30px;
 }
 
 .carrito-lista {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .carrito-item {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 1rem;
-  border: 1px solid #ddd;
-  padding: 1rem;
-  border-radius: 10px;
+  border-radius: 12px;
   background-color: #fff;
+  padding: 1rem;
+  padding-left: 30px;
+  padding-right: 30px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease;
+}
+
+.carrito-item:hover {
+  transform: translateY(-2px);
 }
 
 .carrito-item img {
   width: 100px;
+  height: 100px;
+  object-fit: cover;
   border-radius: 8px;
+}
+
+.info {
+  flex: 1;
 }
 
 .info h3 {
   margin: 0;
+  font-size: 1.1rem;
+  color: #222;
 }
 
 .info p {
-  margin: 0.2rem 0;
+  margin: 4px 0;
+  color: #555;
 }
 
-.info button {
-  background-color: #ff4444;
+.eliminar-btn {
+  background-color: #544444;
   color: white;
   border: none;
-  padding: 8px 12px;
+  padding: 8px 16px;
+  font-size: 14px;
   border-radius: 6px;
   cursor: pointer;
-  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.eliminar-btn:hover {
+  background-color: #3d2c2c;
+}
+
+.carrito-container h3 {
+  text-align: left;
+  font-size: 1.5rem;
+  color: #444;
+  margin-top: 30px;
+}
+
+.carrito-container h4 {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #444;
+  margin-top: 30px;
+}
+
+.carrito-container .btn.btn-primary {
+  display: block;
+  margin: 20px auto 0;
+  background-color: #222;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 6px;
+  font-size: 15px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.carrito-container .btn.btn-primary:hover {
+  background-color: #444;
 }

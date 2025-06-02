@@ -36,33 +36,23 @@ function Registro() {
   return (
     <div className="auth-container">
       <div className="auth-card">
-        <h2 className="text-center auth-title mb-4">Registro</h2>
-        <form onSubmit={handleRegister}>
-          <div className="mb-3">
-            <label className="form-label">Nombre</label>
-            <input type="text" className="form-control" value={nombre} onChange={(e) => setNombre(e.target.value)} required />
-          </div>
+        <h2 className="auth-title">Registro</h2>
+        <form onSubmit={handleRegister} className="auth-form">
+          <label>Nombre</label>
+          <input type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} required />
 
-          <div className="mb-3">
-            <label className="form-label">Edad</label>
-            <input type="number" className="form-control" value={edad} onChange={(e) => setEdad(e.target.value)} required />
-          </div>
+          <label>Edad</label>
+          <input type="number" value={edad} onChange={(e) => setEdad(e.target.value)} required />
 
-          <div className="mb-3">
-            <label className="form-label">Correo</label>
-            <input type="email" className="form-control" value={correo} onChange={(e) => setCorreo(e.target.value)} required />
-          </div>
+          <label>Correo</label>
+          <input type="email" value={correo} onChange={(e) => setCorreo(e.target.value)} required />
 
-          <div className="mb-3">
-            <label className="form-label">Contraseña</label>
-            <input type="password" className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} required />
-          </div>
+          <label>Contraseña</label>
+          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
 
-          {error && <div className="alert alert-danger">{error}</div>}
+          {error && <div className="auth-error">{error}</div>}
 
-          <div className="d-grid">
-            <button type="submit" className="btn btn-success">Registrarse</button>
-          </div>
+          <button type="submit" className="auth-btn secondary">Registrarse</button>
         </form>
       </div>
     </div>

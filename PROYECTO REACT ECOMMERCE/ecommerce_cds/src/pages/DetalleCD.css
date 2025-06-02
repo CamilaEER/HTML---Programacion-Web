@@ -1,54 +1,71 @@
 .detalle-container {
-  background-color: #a0c4ff;
+  background: linear-gradient(to right, #f2f2f2, #e8e8e8);
   min-height: 100vh;
-  padding: 40px;
+  padding: 60px 20px;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: 'Helvetica Neue', sans-serif;
 }
 
 .detalle-card {
-  background-color: white;
+  background-color: #ffffff;
   border-radius: 16px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-  padding: 24px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  padding: 32px;
   display: flex;
-  gap: 24px;
-  max-width: 800px;
+  flex-direction: row;
+  gap: 32px;
+  max-width: 900px;
   width: 100%;
 }
 
 .detalle-img {
-  max-width: 300px;
+  max-width: 320px;
   border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 .detalle-info {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  color: #333;
 }
 
 .detalle-info h1 {
-  color: #ff6ec4;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #2b2b2b;
+  margin-bottom: 10px;
 }
 
 .detalle-info h3 {
-  color: #1982c4;
+  font-size: 1.2rem;
+  color: #6a00f4;
+  margin-bottom: 20px;
+}
+
+.detalle-info p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #555;
 }
 
 .carrito-btn {
-  background-color: #ff6ec4;
+  background-color: #1f1f1f;
   color: white;
   padding: 12px 24px;
   border: none;
-  border-radius: 8px;
-  font-size: 16px;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 500;
   cursor: pointer;
-  margin-top: 20px;
+  margin-top: 25px;
+  width: 180px;
   transition: background-color 0.3s ease;
 }
 
 .carrito-btn:hover {
-  background-color: #e15bb3;
+  background-color: #444;
 }

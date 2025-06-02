@@ -131,3 +131,52 @@ app.get('/api/cds/:id', (req, res) => {
     res.json(result[0]); // Devuelve un solo CD
   });
 });
+
+// Ruta para registrar un pedido y su detalle
+app.post('/pedido', (req, res) => {
+  const { idPersona, total, items } = req.body;
+
+  // Validar que vengan datos
+  if (!idPersona || !total || !items || !Array.isArray(items)) {
+    return res.status(400).json({ message: 'Datos incompletos' });
+  }
+
+  // 1. Insertar en tabla Pedidos
+  const insertPedido = 'INSERT INTO Pedidos (idPersona, Total) VALUES (?, ?)';
+  db.query(insertPedido, [idPersona, total], (err, result) => {
+    if (err) {
+      console.error('Error al insertar en Pedidos:', err);
+      return res.status(500).json({ message: 'Error al registrar el pedido' });
+    }
+
+    const idPedido = result.insertId;
+
+    // 2. Insertar cada CD en DetallePedido
+    const insertDetalle = `
+      INSERT INTO DetallePedido (idPedido, idCD, Cantidad, PrecioUnitario)
+      VALUES (?, ?, ?, ?)
+    `;
+
+    const promises = items.map(item => {
+      return new Promise((resolve, reject) => {
+        db.query(
+          insertDetalle,
+          [idPedido, item.idCD, item.cantidad, item.precio],
+          (err) => {
+            if (err) reject(err);
+            else resolve();
+          }
+        );
+      });
+    });
+
+    Promise.all(promises)
+      .then(() => {
+        res.status(200).json({ message: 'Pedido y detalle registrados correctamente' });
+      })
+      .catch((err) => {
+        console.error('Error al insertar detalle:', err); // 👈 esto imprimirá el error exacto
+        res.status(500).json({ message: 'Error al registrar detalle del pedido', error: err });
+      });
+  });
+});
