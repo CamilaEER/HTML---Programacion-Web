@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Canvas Básico</title>
+</head>
+<body>
+    <h1>Canvas en HTML5</h1>
+    <canvas id="miCanvas" width="400" height="200" style="border:1px solid #000000;"></canvas>
+
+    <script>
+        const canvas = document.getElementById('miCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Dibujar un rectángulo azul
+        ctx.fillStyle = '#0000FF';
+        ctx.fillRect(50, 50, 150, 100);
+
+        // Escribir texto encima
+        ctx.font = '20px Arial';
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillText('Hola Canvas!', 70, 110);
+    </script>
+</body>
+</html>

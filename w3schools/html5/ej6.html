@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Local Storage HTML5</title>
+</head>
+<body>
+    <h1>Almacenamiento Local</h1>
+
+    <input type="text" id="nombre" placeholder="Escribe tu nombre" />
+    <button onclick="guardarNombre()">Guardar Nombre</button>
+
+    <p id="saludo"></p>
+
+    <script>
+        // Mostrar saludo si hay nombre guardado
+        window.onload = function () {
+            const nombre = localStorage.getItem('nombre');
+            if (nombre) {
+                document.getElementById('saludo').innerText = 'Hola, ' + nombre + '!';
+            }
+        };
+
+        function guardarNombre() {
+            const nombre = document.getElementById('nombre').value;
+            if (nombre) {
+                localStorage.setItem('nombre', nombre);
+                document.getElementById('saludo').innerText = 'Hola, ' + nombre + '!';
+            }
+        }
+    </script>
+</body>
+</html>
