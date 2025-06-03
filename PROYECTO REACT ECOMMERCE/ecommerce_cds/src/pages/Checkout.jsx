@@ -8,9 +8,7 @@ function Checkout() {
 
   // Datos del formulario
   const [nombre, setNombre] = useState('');
-  const [correo, setCorreo] = useState('');
   const [direccion, setDireccion] = useState('');
-  const [ciudad, setCiudad] = useState('');
   const [codigoPostal, setCodigoPostal] = useState('');
   const [metodoPago, setMetodoPago] = useState('tarjeta');
 

@@ -4,6 +4,7 @@ import mysql.connector
 import bcrypt
 import jwt
 import datetime
+print("Cargando servidor Flask con todas las rutas...")
 
 app = Flask(__name__)
 CORS(app)  # Permitir todas las solicitudes CORS
@@ -15,12 +16,41 @@ db_config = {
     'host': 'localhost',
     'user': 'root',
     'password': '1212313',  # Cambia con tu contraseña real
-    'database': 'EcommerceCDs'
+    'database': 'ecommercecds'
 }
 
 # Función para obtener conexión
 def get_db_connection():
     return mysql.connector.connect(**db_config)
+
+def test_db_connection():
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute('SELECT 1')
+        # Lee el resultado para limpiar el buffer
+        cursor.fetchone()
+        cursor.close()
+        conn.close()
+        print("Conexión a la base de datos exitosa ✅")
+        return True
+    except mysql.connector.Error as err:
+        print(f"Error al conectar a la base de datos: {err} ❌")
+        return False
+
+
+# Ruta para testear conexión vía HTTP
+@app.route('/test-db', methods=['GET'])
+def test_db():
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute('SELECT 1')
+        cursor.close()
+        conn.close()
+        return jsonify({'message': 'Conexión a la base de datos exitosa'}), 200
+    except mysql.connector.Error as err:
+        return jsonify({'message': 'Error en conexión a la base de datos', 'error': str(err)}), 500
 
 # Ruta para login
 @app.route('/login', methods=['POST'])
@@ -94,24 +124,28 @@ def registro():
 
     return jsonify({'message': 'Usuario registrado con éxito'}), 201
 
-# Ruta para obtener lista de CDs con artistas
 @app.route('/api/cds', methods=['GET'])
 def get_cds():
-    conn = get_db_connection()
-    cursor = conn.cursor(dictionary=True)
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor(dictionary=True)
 
-    query = '''
-        SELECT CDs.*, Artistas.Nombre AS ArtistaNombre
-        FROM CDs
-        JOIN Artistas ON CDs.idArtista = Artistas.idArtista
-    '''
-    cursor.execute(query)
-    results = cursor.fetchall()
+        query = '''
+            SELECT CDs.*, Artistas.Nombre AS ArtistaNombre
+            FROM CDs
+            JOIN Artistas ON CDs.idArtista = Artistas.idArtista
+        '''
+        cursor.execute(query)
+        results = cursor.fetchall()
 
-    cursor.close()
-    conn.close()
+        cursor.close()
+        conn.close()
 
-    return jsonify(results)
+        return jsonify(results)
+    except mysql.connector.Error as err:
+        print(f"Error en /api/cds: {err}")
+        return jsonify({'message': 'Error en base de datos', 'error': str(err)}), 500
+
 
 # Ruta para obtener un CD específico
 @app.route('/api/cds/<int:id>', methods=['GET'])
@@ -179,5 +213,16 @@ def registrar_pedido():
 
     return jsonify({'message': 'Pedido y detalle registrados correctamente'}), 200
 
+@app.route('/')
+def home():
+    return 'Servidor Flask activo y funcionando!'
+
+
 if __name__ == '__main__':
-    app.run(port=5000, debug=True)
+    print("Iniciando servidor")
+    if test_db_connection():
+        print("Iniciando servidor Flask...")
+
+        app.run(port=5000, debug=True)
+    else:
+        print("No se pudo establecer conexión con la base de datos. Revisa la configuración.")
