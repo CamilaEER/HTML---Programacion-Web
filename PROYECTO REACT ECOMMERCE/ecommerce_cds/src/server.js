@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: '1212313',  // Cambia esto con tu propia contraseña de MySQL
+  password: 'D@vid2003',  // Cambia esto con tu propia contraseña de MySQL
   database: 'EcommerceCDs',
 });
 
@@ -104,6 +104,19 @@ app.get('/api/cds', (req, res) => {
       return res.status(500).json({ message: 'Error al obtener los CDs' });
     }
     res.json(result); // Devolver los CDs con el nombre del artista
+  });
+});
+
+// ruta para generos
+app.get('/api/generos', (req, res) => {
+  const query = `SELECT * FROM Generos`;
+
+  db.query(query, (err, result) => {
+    if (err) {
+      console.error('Error al obtener los géneros:', err);
+      return res.status(500).json({ message: 'Error al obtener los géneros' });
+    }
+    res.json(result);
   });
 });
 

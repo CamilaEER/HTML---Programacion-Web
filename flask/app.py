@@ -7,7 +7,7 @@ app = Flask(__name__)
 # Configuración para conectar con la base de datos MySQL
 app.config['MYSQL_HOST'] = 'localhost'          # Host donde está corriendo MySQL
 app.config['MYSQL_USER'] = 'root'              # Usuario de MySQL
-app.config['MYSQL_PASSWORD'] = ''        # Contraseña de MySQL
+app.config['MYSQL_PASSWORD'] = 'D@vid2003'        # Contraseña de MySQL
 app.config['MYSQL_DB'] = 'bdprueba'              # Nombre de la base de datos
 
 # Inicializar la extensión MySQL para usarla con Flask
