@@ -14,6 +14,7 @@ const cursos = [
       'Hooks Básicos',
     ],
     precioCertificado: 50,
+    idCertificado: 1,
   },
   {
     id: 2,
@@ -26,6 +27,7 @@ const cursos = [
       'Promesas y Async/Await',
     ],
     precioCertificado: 40,
+    idCertificado: 2,
   },
   {
     id: 3,
@@ -38,6 +40,7 @@ const cursos = [
       'Manejo de archivos',
     ],
     precioCertificado: 30,
+    idCertificado: 3,
   },
 ];
 

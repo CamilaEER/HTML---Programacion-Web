@@ -59,5 +59,51 @@ def login():
     else:
         return jsonify({'message': 'Contraseña incorrecta'}), 400
 
+from flask import request
+import jwt
+
+SECRET_KEY = 'tu_secreto_super_seguro'  # Debe ser el mismo que usas para firmar los tokens
+
+@app.route('/compras', methods=['POST'])
+def registrar_compra():
+    token = None
+    # Obtener token JWT del header Authorization
+    auth_header = request.headers.get('Authorization')
+    if auth_header and auth_header.startswith('Bearer '):
+        token = auth_header.split(' ')[1]
+    else:
+        return jsonify({'message': 'Token no proporcionado'}), 401
+
+    try:
+        decoded = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
+        idUsuario = decoded.get('idUsuario')
+        if not idUsuario:
+            return jsonify({'message': 'Token inválido: falta idUsuario'}), 401
+    except jwt.ExpiredSignatureError:
+        return jsonify({'message': 'Token expirado'}), 401
+    except jwt.InvalidTokenError:
+        return jsonify({'message': 'Token inválido'}), 401
+
+    data = request.json
+    idCertificado = data.get('idCertificado')
+    if not idCertificado:
+        return jsonify({'message': 'Falta idCertificado'}), 400
+
+    cur = mysql.connection.cursor()
+    try:
+        cur.execute("""
+            INSERT INTO Compras (idUsuario, idCertificado, Estado)
+            VALUES (%s, %s, 'pagado')
+        """, (idUsuario, idCertificado))
+        mysql.connection.commit()
+        return jsonify({'message': 'Compra registrada con éxito'}), 201
+    except Exception as e:
+        mysql.connection.rollback()
+        return jsonify({'message': 'Error al registrar compra', 'error': str(e)}), 500
+    finally:
+        cur.close()
+
+
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
+
