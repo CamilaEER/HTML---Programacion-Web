@@ -1,15 +1,17 @@
-<!-- Centrar un div en la pantalla -->
+<!-- 4 -->
+<!-- Centrar un div en la pantalla usando CSS -->
 
 <div class="centrado">Contenido</div>
 
 <style>
   .centrado {
-    width: 200px;
-    height: 100px;
-    background: lightblue;
-    position: absolute;
-    top: 50%;
-    left: 50%;
+    width: 200px; /* Ancho fijo */
+    height: 100px; /* Alto fijo */
+    background: lightblue; /* Fondo azul claro */
+    position: absolute; /* Posicionamiento absoluto respecto al viewport */
+    top: 50%; /* 50% desde arriba */
+    left: 50%; /* 50% desde la izquierda */
+    /* Mueve el elemento hacia arriba y a la izquierda la mitad de su tamaño para centrarlo */
     transform: translate(-50%, -50%);
   }
 </style>
