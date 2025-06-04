@@ -107,19 +107,6 @@ app.get('/api/cds', (req, res) => {
   });
 });
 
-// ruta para generos
-app.get('/api/generos', (req, res) => {
-  const query = `SELECT * FROM Generos`;
-
-  db.query(query, (err, result) => {
-    if (err) {
-      console.error('Error al obtener los géneros:', err);
-      return res.status(500).json({ message: 'Error al obtener los géneros' });
-    }
-    res.json(result);
-  });
-});
-
 // Ruta para obtener un CD específico por su ID
 app.get('/api/cds/:id', (req, res) => {
   const { id } = req.params;

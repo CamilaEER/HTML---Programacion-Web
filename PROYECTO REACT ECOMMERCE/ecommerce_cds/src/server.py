@@ -15,7 +15,7 @@ app.config['SECRET_KEY'] = 'secreta'  # Cambia por tu propia clave secreta para 
 db_config = {
     'host': 'localhost',
     'user': 'root',
-    'password': '1212313',  # Cambia con tu contraseña real
+    'password': 'D@vid2003',  # Cambia con tu contraseña real
     'database': 'ecommercecds'
 }
 
@@ -131,9 +131,10 @@ def get_cds():
         cursor = conn.cursor(dictionary=True)
 
         query = '''
-            SELECT CDs.*, Artistas.Nombre AS ArtistaNombre
-            FROM CDs
-            JOIN Artistas ON CDs.idArtista = Artistas.idArtista
+            SELECT CDs.*, Artistas.Nombre AS ArtistaNombre, Generos.Nombre AS GeneroNombre
+        FROM CDs
+        JOIN Artistas ON CDs.idArtista = Artistas.idArtista
+        JOIN Generos ON CDs.idGenero = Generos.idGenero
         '''
         cursor.execute(query)
         results = cursor.fetchall()
@@ -145,6 +146,24 @@ def get_cds():
     except mysql.connector.Error as err:
         print(f"Error en /api/cds: {err}")
         return jsonify({'message': 'Error en base de datos', 'error': str(err)}), 500
+
+@app.route('/api/generos', methods=['GET'])
+def obtener_generos():
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    query = "SELECT * FROM Generos"
+
+    try:
+        cursor.execute(query)
+        generos = cursor.fetchall()
+        return jsonify(generos)
+    except Exception as e:
+        print("Error al obtener los géneros:", e)
+        return jsonify({"message": "Error al obtener los géneros"}), 500
+    finally:
+        cursor.close()
+        conn.close()
 
 
 # Ruta para obtener un CD específico
@@ -212,6 +231,40 @@ def registrar_pedido():
     conn.close()
 
     return jsonify({'message': 'Pedido y detalle registrados correctamente'}), 200
+
+# Ruta para ver los pedidos del cliente
+@app.route('/api/pedidos/<int:idPersona>', methods=['GET'])
+def obtener_pedidos_usuario(idPersona):
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor(dictionary=True)
+
+        query_pedidos = '''
+            SELECT * FROM Pedidos
+            WHERE idPersona = %s
+            ORDER BY FechaPedido DESC
+        '''
+        cursor.execute(query_pedidos, (idPersona,))
+        pedidos = cursor.fetchall()
+
+        for pedido in pedidos:
+            cursor.execute('''
+                SELECT DetallePedido.*, CDs.Titulo, CDs.ImagenURL
+                FROM DetallePedido
+                JOIN CDs ON DetallePedido.idCD = CDs.idCD
+                WHERE DetallePedido.idPedido = %s
+            ''', (pedido['idPedido'],))
+            detalles = cursor.fetchall()
+            pedido['detalles'] = detalles
+
+        cursor.close()
+        conn.close()
+
+        return jsonify(pedidos)
+    except Exception as e:
+        print("Error al obtener pedidos:", e)
+        return jsonify({'message': 'Error al obtener pedidos', 'error': str(e)}), 500
+
 
 @app.route('/')
 def home():

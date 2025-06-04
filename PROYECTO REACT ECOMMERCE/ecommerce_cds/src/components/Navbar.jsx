@@ -33,6 +33,16 @@ function Navbar() {
       </div>
 
       <div style={{ display: 'flex', alignItems: 'center', gap: '1.2rem' }}>
+        
+        <Link to="/MisPedidos" style={{
+          color: '#333',
+          textDecoration: 'none',
+          fontSize: '16px',
+          transition: 'color 0.2s ease'
+        }}>
+          Mis pedidos
+        </Link>
+
         <Link to="/carrito" style={{
           color: '#333',
           textDecoration: 'none',
@@ -41,7 +51,7 @@ function Navbar() {
         }}>
           🛒 Carrito
         </Link>
-
+        
         <button
           onClick={handleLogout}
           style={{

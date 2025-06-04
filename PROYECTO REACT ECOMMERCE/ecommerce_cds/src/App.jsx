@@ -4,7 +4,6 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 
-
 import LandingPage from './pages/LandingPage';
 import Login from './pages/Login';
 import Registro from './pages/Registro';
@@ -12,10 +11,11 @@ import Home from './pages/Home';
 import DetalleCD from './pages/DetalleCD';  // Importación correcta
 import Carrito from './pages/Carrito';
 import Checkout from './pages/Checkout';
+import MisPedidos from './pages/MisPedidos';
 
-<Route path="/carrito" element={<Carrito />} />
 
 function App() {
+  const idPersona = localStorage.getItem('idPersona');
   return (
     <Router>
       <Routes>
@@ -26,6 +26,8 @@ function App() {
         <Route path="/cd/:id" element={<DetalleCD />} />  {/* Asegúrate de que este sea el componente correcto */}
         <Route path="/carrito" element={<Carrito />} />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="/carrito" element={<Carrito />} />
+        <Route path="/mispedidos" element={<MisPedidos idPersona={idPersona} />} />
       </Routes>
     </Router>
   );
