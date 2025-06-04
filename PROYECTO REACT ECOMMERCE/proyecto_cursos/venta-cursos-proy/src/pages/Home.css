@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #0f2027);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  color: #fff;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.home-container {
+  max-width: 1000px;
+  margin: 3rem auto;
+  padding: 1rem;
+  text-align: center;
+}
+
+.home-container h1 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
+.cursos-grid {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.curso-card {
+  background: rgba(255, 255, 255, 0.07);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  width: 280px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.curso-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+}
+
+.curso-card h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.curso-card p {
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+.curso-card button {
+  background: linear-gradient(to right, #00c9ff, #92fe9d);
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #222;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.curso-card button:hover {
+  transform: scale(1.05);
+}

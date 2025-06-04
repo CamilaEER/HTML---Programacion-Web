@@ -1,6 +1,7 @@
 // src/pages/Home.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './Home.css';
 
 const cursos = [
   {
@@ -22,26 +23,15 @@ const cursos = [
 
 export default function Home() {
   return (
-    <div style={{ maxWidth: 900, margin: '2rem auto', padding: '0 1rem' }}>
+    <div className="home-container">
       <h1>Catálogo de Cursos</h1>
-      <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+      <div className="cursos-grid">
         {cursos.map((curso) => (
-          <div 
-            key={curso.id} 
-            style={{
-              border: '1px solid #ccc',
-              borderRadius: 8,
-              padding: 20,
-              width: 270,
-              boxShadow: '2px 2px 6px rgba(0,0,0,0.1)'
-            }}
-          >
+          <div key={curso.id} className="curso-card">
             <h3>{curso.titulo}</h3>
             <p>{curso.descripcion}</p>
             <Link to={`/curso/${curso.id}`}>
-              <button style={{ padding: '0.5rem 1rem' }}>
-                Ver Detalle
-              </button>
+              <button>Ver Detalle</button>
             </Link>
           </div>
         ))}
@@ -49,3 +39,4 @@ export default function Home() {
     </div>
   );
 }
+

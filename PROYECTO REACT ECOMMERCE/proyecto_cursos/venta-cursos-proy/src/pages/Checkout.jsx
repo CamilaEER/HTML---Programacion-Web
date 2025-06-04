@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import './CheckYDetalles.css';
 
 export default function Checkout() {
   const location = useLocation();
@@ -13,35 +14,27 @@ export default function Checkout() {
   const [telefonoCliente, setTelefonoCliente] = useState('');
 
   const token = localStorage.getItem('token');
+  if (!curso) return <p>No hay información del curso para pagar.</p>;
 
-  if (!curso) {
-    return <p>No hay información del curso para pagar.</p>;
-  }
-
-
-  
   const handlePago = async (e) => {
     e.preventDefault();
     setError('');
 
     try {
-      // Supongamos que el idUsuario está guardado en el token o localStorage
-      // Aquí simulamos obtenerlo (ajusta según tu autenticación real)
-      const idUsuario = 1; // Reemplaza por lógica real para obtener el usuario logueado
+      const idUsuario = 1;
 
       const res = await fetch('http://localhost:5000/compras', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,  // <-- aquí envías el token JWT
+          'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify({
-          idCertificado: curso.idCertificado,  // asegúrate de que `curso` tenga idCertificado
+          idCertificado: curso.idCertificado,
         }),
       });
 
       const data = await res.json();
-
       if (!res.ok) {
         setError(data.message || 'Error al procesar la compra');
       } else {
@@ -54,7 +47,7 @@ export default function Checkout() {
   };
 
   return (
-    <div style={{ maxWidth: 600, margin: '2rem auto', padding: '0 1rem' }}>
+    <div className="checkout-container">
       <h1>Checkout</h1>
 
       {!pagado ? (
@@ -63,7 +56,7 @@ export default function Checkout() {
           <h2>{curso.titulo}</h2>
           <p>Precio: ${curso.precioCertificado}</p>
 
-          <form onSubmit={handlePago} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <form onSubmit={handlePago} className="checkout-form">
             <input
               type="text"
               placeholder="Nombre Completo"
@@ -85,15 +78,15 @@ export default function Checkout() {
               onChange={e => setTelefonoCliente(e.target.value)}
               required
             />
-            <button type="submit" style={{ padding: '0.5rem 1rem', fontSize: '1.2rem' }}>
+            <button type="submit" className="button-primary">
               Pagar
             </button>
           </form>
 
-          {error && <p style={{ color: 'red' }}>{error}</p>}
+          {error && <p className="error-message">{error}</p>}
         </>
       ) : (
-        <div style={{ textAlign: 'center' }}>
+        <div className="success-message">
           <h2>¡Pago exitoso!</h2>
           <p>Gracias por tu compra.</p>
           <p>Serás redirigido al inicio en breve...</p>

@@ -10,7 +10,7 @@ CORS(app)
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = '1212313'
+app.config['MYSQL_PASSWORD'] = 'D@vid2003'
 app.config['MYSQL_DB'] = 'VentaCursos'
 
 mysql = MySQL(app)
@@ -102,7 +102,6 @@ def registrar_compra():
         return jsonify({'message': 'Error al registrar compra', 'error': str(e)}), 500
     finally:
         cur.close()
-
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)

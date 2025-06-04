@@ -1,6 +1,7 @@
 // src/pages/CursoDetalle.jsx
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import './CheckYDetalles.css';
 
 const cursos = [
   {
@@ -47,21 +48,16 @@ const cursos = [
 export default function CursoDetalle() {
   const { id } = useParams();
   const navigate = useNavigate();
-
-  // Buscar el curso por id
   const curso = cursos.find(c => c.id === parseInt(id));
 
-  if (!curso) {
-    return <p>Curso no encontrado.</p>;
-  }
+  if (!curso) return <p>Curso no encontrado.</p>;
 
   const handleComprar = () => {
-    // Redirigir a checkout, podrías pasar info por state o params
     navigate('/checkout', { state: { curso } });
   };
 
   return (
-    <div style={{ maxWidth: 700, margin: '2rem auto', padding: '0 1rem' }}>
+    <div className="curso-container">
       <h1>{curso.titulo}</h1>
       <p>{curso.descripcion}</p>
 
@@ -72,10 +68,7 @@ export default function CursoDetalle() {
         ))}
       </ul>
 
-      <button 
-        onClick={handleComprar} 
-        style={{ marginTop: 20, padding: '0.5rem 1rem', fontSize: '1rem' }}
-      >
+      <button className="button-primary" onClick={handleComprar}>
         Comprar Certificado (${curso.precioCertificado})
       </button>
     </div>

@@ -1,6 +1,7 @@
 // src/pages/Registro.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './AuthForms.css';
 
 function Registro() {
   const [nombre, setNombre] = useState('');
@@ -33,7 +34,7 @@ function Registro() {
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: '2rem auto' }}>
+    <div className="auth-container">
       <h2>Registro</h2>
       <form onSubmit={handleSubmit}>
         <input type="text" placeholder="Nombre" value={nombre} onChange={e => setNombre(e.target.value)} required />
@@ -41,7 +42,7 @@ function Registro() {
         <input type="password" placeholder="Contraseña" value={password} onChange={e => setPassword(e.target.value)} required />
         <button type="submit">Registrarse</button>
       </form>
-      {error && <p style={{color: 'red'}}>{error}</p>}
+      {error && <p>{error}</p>}
     </div>
   );
 }

@@ -1,6 +1,7 @@
 // src/pages/Login.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './AuthForms.css';
 
 function Login() {
   const [correo, setCorreo] = useState('');
@@ -32,14 +33,14 @@ function Login() {
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: '2rem auto' }}>
+    <div className="auth-container">
       <h2>Iniciar Sesión</h2>
       <form onSubmit={handleSubmit}>
         <input type="email" placeholder="Correo" value={correo} onChange={e => setCorreo(e.target.value)} required />
         <input type="password" placeholder="Contraseña" value={password} onChange={e => setPassword(e.target.value)} required />
         <button type="submit">Entrar</button>
       </form>
-      {error && <p style={{color: 'red'}}>{error}</p>}
+      {error && <p>{error}</p>}
     </div>
   );
 }
