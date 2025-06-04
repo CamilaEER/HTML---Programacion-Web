@@ -1,25 +1,34 @@
+<!-- 5 -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <title>Canvas Básico</title>
+    <meta charset="UTF-8" /> <!-- Codificación UTF-8 -->
+    <title>Canvas Básico</title> <!-- Título -->
 </head>
 <body>
-    <h1>Canvas en HTML5</h1>
+    <h1>Canvas en HTML5</h1> <!-- Título -->
+
+    <!-- Canvas con borde negro, ancho y alto definidos -->
     <canvas id="miCanvas" width="400" height="200" style="border:1px solid #000000;"></canvas>
 
     <script>
+        // Obtener referencia al canvas
         const canvas = document.getElementById('miCanvas');
+        // Obtener contexto 2D para dibujar
         const ctx = canvas.getContext('2d');
 
-        // Dibujar un rectángulo azul
+        // Establecer color de relleno azul
         ctx.fillStyle = '#0000FF';
+        // Dibujar un rectángulo en posición (50,50) con ancho 150 y alto 100
         ctx.fillRect(50, 50, 150, 100);
 
-        // Escribir texto encima
+        // Configurar fuente para texto
         ctx.font = '20px Arial';
+        // Cambiar color de texto a blanco
         ctx.fillStyle = '#FFFFFF';
+        // Escribir texto 'Hola Canvas!' en posición (70,110)
         ctx.fillText('Hola Canvas!', 70, 110);
     </script>
 </body>
 </html>
+

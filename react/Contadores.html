@@ -1,10 +1,10 @@
+<!-- 2 -->
 <!DOCTYPE html>
 <html>
 <body>
-  <div id="root"></div>
+  <div id="root"></div> <!-- Contenedor React -->
 </body>
-<!-- This setup is not suitable for production. -->
-<!-- Only use it in development! -->
+<!-- Setup de desarrollo -->
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script async src="https://ga.jspm.io/npm:es-module-shims@1.7.0/dist/es-module-shims.js"></script>
 <script type="importmap">
@@ -15,15 +15,18 @@
   }
 }
 </script>
+
 <script type="text/babel" data-type="module">
 import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
-import { useState } from 'react';
+import { useState } from 'react'; // Hook para estado
 
+// Componente principal con contador compartido
 let App = function MyApp() {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(0); // Estado contador
 
+  // Función para aumentar el contador
   function handleClick() {
     setCount(count + 1);
   }
@@ -31,12 +34,14 @@ let App = function MyApp() {
   return (
     <div>
       <h1>Contadores que se actualizan juntos</h1>
+      {/* Dos botones que comparten el mismo estado y función */}
       <MyButton count={count} onClick={handleClick} />
       <MyButton count={count} onClick={handleClick} />
     </div>
   );
 }
 
+// Botón que recibe props count y onClick
 function MyButton({ count, onClick }) {
   return (
     <button onClick={onClick}>
@@ -45,7 +50,7 @@ function MyButton({ count, onClick }) {
   );
 }
 
-
+// Crear raíz y renderizar app
 const root = createRoot(document.getElementById('root'));
 root.render(
   <StrictMode>
@@ -53,59 +58,24 @@ root.render(
   </StrictMode>
 );
 </script>
+
 <style>
-* {
-  box-sizing: border-box;
-}
+/* Misma base de estilos que antes */
+* { box-sizing: border-box; }
+body { font-family: sans-serif; margin: 20px; padding: 0; }
+h1 { margin-top: 0; font-size: 22px; }
+h2 { margin-top: 0; font-size: 20px; }
+h3 { margin-top: 0; font-size: 18px; }
+h4 { margin-top: 0; font-size: 16px; }
+h5 { margin-top: 0; font-size: 14px; }
+h6 { margin-top: 0; font-size: 12px; }
+code { font-size: 1.2em; }
+ul { padding-inline-start: 20px; }
 
-body {
-  font-family: sans-serif;
-  margin: 20px;
-  padding: 0;
-}
-
-h1 {
-  margin-top: 0;
-  font-size: 22px;
-}
-
-h2 {
-  margin-top: 0;
-  font-size: 20px;
-}
-
-h3 {
-  margin-top: 0;
-  font-size: 18px;
-}
-
-h4 {
-  margin-top: 0;
-  font-size: 16px;
-}
-
-h5 {
-  margin-top: 0;
-  font-size: 14px;
-}
-
-h6 {
-  margin-top: 0;
-  font-size: 12px;
-}
-
-code {
-  font-size: 1.2em;
-}
-
-ul {
-  padding-inline-start: 20px;
-}
-
+/* Botones con margen inferior para separarlos */
 button {
   display: block;
   margin-bottom: 5px;
 }
-
 </style>
 </html>

@@ -1,26 +1,31 @@
+<!-- 3 -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8" />
     <title>Selectors y Hover</title>
     <style>
+        /* Estilo para cada elemento <li> dentro de un <ul> */
         ul li {
-            list-style-type: none;
-            padding: 10px;
-            background-color: #f4f4f4;
-            margin: 5px 0;
-            transition: background-color 0.3s ease;
+            list-style-type: none; /* Sin viñetas */
+            padding: 10px; /* Espacio interno */
+            background-color: #f4f4f4; /* Fondo gris claro */
+            margin: 5px 0; /* Margen vertical entre elementos */
+            transition: background-color 0.3s ease; /* Transición suave para el cambio de color */
         }
 
+        /* Estilo cuando el cursor está sobre el <li> */
         ul li:hover {
-            background-color: #87ceeb;
-            color: white;
-            cursor: pointer;
+            background-color: #87ceeb; /* Fondo azul celeste */
+            color: white; /* Texto blanco */
+            cursor: pointer; /* Cambia el cursor a puntero para indicar clic */
         }
     </style>
 </head>
 <body>
+    <!-- Título de la lista -->
     <h1>Lista con efecto hover</h1>
+    <!-- Lista desordenada -->
     <ul>
         <li>Elemento 1</li>
         <li>Elemento 2</li>
