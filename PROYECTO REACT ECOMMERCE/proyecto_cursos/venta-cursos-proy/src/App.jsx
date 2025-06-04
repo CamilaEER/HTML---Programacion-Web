@@ -8,6 +8,8 @@ import Home from './pages/Home';
 import CursoDetalle from './pages/CursoDetalle';
 import Checkout from './pages/Checkout';
 import ProtectedRoute from './components/ProtectedRoute';
+import CursoVideos from './pages/CursoVideos';
+
 
 function App() {
   return (
@@ -39,6 +41,14 @@ function App() {
           element={
             <ProtectedRoute>
               <Checkout />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/curso-videos"
+          element={
+            <ProtectedRoute>
+              <CursoVideos />
             </ProtectedRoute>
           } 
         />

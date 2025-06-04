@@ -1,25 +1,9 @@
 // src/pages/Home.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
+import cursos from '../data/cursos';
 import './Home.css';
 
-const cursos = [
-  {
-    id: 1,
-    titulo: 'Curso de React Básico',
-    descripcion: 'Aprende los fundamentos de React.',
-  },
-  {
-    id: 2,
-    titulo: 'JavaScript Moderno',
-    descripcion: 'Domina ES6+ y conceptos modernos de JS.',
-  },
-  {
-    id: 3,
-    titulo: 'Python para Principiantes',
-    descripcion: 'Introducción a Python paso a paso.',
-  },
-];
 
 export default function Home() {
   return (
