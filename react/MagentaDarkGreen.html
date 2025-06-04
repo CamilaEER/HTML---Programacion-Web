@@ -1,10 +1,10 @@
+<!-- 4 -->
 <!DOCTYPE html>
 <html>
 <body>
-  <div id="root"></div>
+  <div id="root"></div> <!-- Contenedor React -->
 </body>
-<!-- This setup is not suitable for production. -->
-<!-- Only use it in development! -->
+<!-- Setup desarrollo -->
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script async src="https://ga.jspm.io/npm:es-module-shims@1.7.0/dist/es-module-shims.js"></script>
 <script type="importmap">
@@ -15,34 +15,39 @@
   }
 }
 </script>
+
 <script type="text/babel" data-type="module">
 import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
+// Array con productos, cada uno con título, si es fruta y id
 const products = [
   { title: 'Cabbage', isFruit: false, id: 1 },
   { title: 'Garlic', isFruit: false, id: 2 },
   { title: 'Apple', isFruit: true, id: 3 },
 ];
 
+// Componente que genera lista de productos coloreados según tipo
 let App = function ShoppingList() {
+  // Mapear productos a elementos <li>, con color diferente si es fruta
   const listItems = products.map(product =>
     <li
-      key={product.id}
+      key={product.id} // Key única para cada elemento
       style={{
-        color: product.isFruit ? 'magenta' : 'darkgreen'
+        color: product.isFruit ? 'magenta' : 'darkgreen' // Magenta si fruta, verde si no
       }}
     >
-      {product.title}
+      {product.title} {/* Título producto */}
     </li>
   );
 
+  // Renderizar lista
   return (
     <ul>{listItems}</ul>
   );
 }
 
-
+// Renderizado React
 const root = createRoot(document.getElementById('root'));
 root.render(
   <StrictMode>
@@ -50,55 +55,18 @@ root.render(
   </StrictMode>
 );
 </script>
+
 <style>
-* {
-  box-sizing: border-box;
-}
-
-body {
-  font-family: sans-serif;
-  margin: 20px;
-  padding: 0;
-}
-
-h1 {
-  margin-top: 0;
-  font-size: 22px;
-}
-
-h2 {
-  margin-top: 0;
-  font-size: 20px;
-}
-
-h3 {
-  margin-top: 0;
-  font-size: 18px;
-}
-
-h4 {
-  margin-top: 0;
-  font-size: 16px;
-}
-
-h5 {
-  margin-top: 0;
-  font-size: 14px;
-}
-
-h6 {
-  margin-top: 0;
-  font-size: 12px;
-}
-
-code {
-  font-size: 1.2em;
-}
-
-ul {
-  padding-inline-start: 20px;
-}
-
-
+/* Estilos base comunes */
+* { box-sizing: border-box; }
+body { font-family: sans-serif; margin: 20px; padding: 0; }
+h1 { margin-top: 0; font-size: 22px; }
+h2 { margin-top: 0; font-size: 20px; }
+h3 { margin-top: 0; font-size: 18px; }
+h4 { margin-top: 0; font-size: 16px; }
+h5 { margin-top: 0; font-size: 14px; }
+h6 { margin-top: 0; font-size: 12px; }
+code { font-size: 1.2em; }
+ul { padding-inline-start: 20px; }
 </style>
 </html>
