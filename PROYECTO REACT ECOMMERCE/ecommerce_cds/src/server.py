@@ -182,9 +182,6 @@ def obtener_generos():
         cursor.close()
         conn.close()
 
-
-=======
->>>>>>> 75fb4037aa3e08fabbbe254ef77510e3555d0ad4
 # Ruta para obtener un CD específico
 @app.route('/api/cds/<int:id>', methods=['GET'])
 def get_cd(id):
