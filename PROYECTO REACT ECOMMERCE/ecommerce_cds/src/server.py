@@ -17,17 +17,11 @@ app.config['SECRET_KEY'] = 'secreta'
 
 # Configuración de conexión a la base de datos MySQL
 db_config = {
-<<<<<<< HEAD
-    'host': 'localhost',
-    'user': 'root',
-    'password': 'D@vid2003',  # Cambia con tu contraseña real
-    'database': 'ecommercecds'
-=======
     'host': 'localhost',  # Dirección del servidor de base de datos
     'user': 'root',       # Nombre de usuario de la base de datos
     'password': '1212313',  # Contraseña para la base de datos (modifica según tu configuración)
     'database': 'ecommercecds'  # Nombre de la base de datos
->>>>>>> 75fb4037aa3e08fabbbe254ef77510e3555d0ad4
+
 }
 
 # Función para obtener la conexión a la base de datos
@@ -163,7 +157,6 @@ def get_cds():
         print(f"Error en /api/cds: {err}")
         return jsonify({'message': 'Error en base de datos', 'error': str(err)}), 500
 
-<<<<<<< HEAD
 @app.route('/api/generos', methods=['GET'])
 def obtener_generos():
     conn = get_db_connection()
@@ -250,7 +243,6 @@ def registrar_pedido():
 
     return jsonify({'message': 'Pedido y detalle registrados correctamente'}), 200
 
-<<<<<<< HEAD
 # Ruta para ver los pedidos del cliente
 @app.route('/api/pedidos/<int:idPersona>', methods=['GET'])
 def obtener_pedidos_usuario(idPersona):
@@ -285,9 +277,8 @@ def obtener_pedidos_usuario(idPersona):
         return jsonify({'message': 'Error al obtener pedidos', 'error': str(e)}), 500
 
 
-=======
+
 # Ruta principal para verificar que el servidor está funcionando
->>>>>>> 75fb4037aa3e08fabbbe254ef77510e3555d0ad4
 @app.route('/')
 def home():
     return 'Servidor Flask activo y funcionando!'
