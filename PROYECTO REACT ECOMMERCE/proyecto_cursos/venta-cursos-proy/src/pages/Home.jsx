@@ -1,3 +1,14 @@
+// Importa React para poder utilizar JSX
+import React from 'react';
+// Importa Link para navegación interna entre rutas
+import { Link } from 'react-router-dom';
+// Importa la lista de cursos desde un archivo local
+import cursos from '../data/cursos';
+// Importa los estilos específicos para esta vista
+import './Home.css';
+// Importa el componente de navegación
+import Navbar from '../components/Navbar';
+
 // Componente funcional Home
 export default function Home() {
   return (
