@@ -103,6 +103,43 @@ def registrar_compra():
     finally:
         cur.close()
 
+@app.route('/mis-certificados', methods=['GET'])
+def obtener_certificados_usuario():
+    token = None
+    auth_header = request.headers.get('Authorization')
+    if auth_header and auth_header.startswith('Bearer '):
+        token = auth_header.split(' ')[1]
+    else:
+        return jsonify({'message': 'Token no proporcionado'}), 401
+
+    try:
+        decoded = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
+        idUsuario = decoded.get('idUsuario')
+        if not idUsuario:
+            return jsonify({'message': 'Token inválido: falta idUsuario'}), 401
+    except jwt.ExpiredSignatureError:
+        return jsonify({'message': 'Token expirado'}), 401
+    except jwt.InvalidTokenError:
+        return jsonify({'message': 'Token inválido'}), 401
+
+    cur = mysql.connection.cursor()
+    try:
+        cur.execute("""
+            SELECT Certificados.idCertificado, Certificados.NombreCertificado, Certificados.Precio
+            FROM Compras
+            JOIN Certificados ON Compras.idCertificado = Certificados.idCertificado
+            WHERE Compras.idUsuario = %s AND Compras.Estado = 'pagado'
+        """, (idUsuario,))
+        certificados = cur.fetchall()
+        certificados_list = [
+            {'idCertificado': c[0], 'nombre': c[1], 'precio': float(c[2])}
+            for c in certificados
+        ]
+        return jsonify(certificados_list)
+    finally:
+        cur.close()
+
+
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
 

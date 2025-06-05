@@ -9,7 +9,7 @@ import CursoDetalle from './pages/CursoDetalle';
 import Checkout from './pages/Checkout';
 import ProtectedRoute from './components/ProtectedRoute';
 import CursoVideos from './pages/CursoVideos';
-
+import MisCertificados from './pages/MisCertificados';
 
 function App() {
   return (
@@ -52,6 +52,12 @@ function App() {
             </ProtectedRoute>
           } 
         />
+        <Route path="/mis-certificados"
+        element={
+          <ProtectedRoute>
+            <MisCertificados />
+          </ProtectedRoute>
+        } />
       </Routes>
     </Router>
   );
